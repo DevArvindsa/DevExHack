@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:type="MailApp">
+  <Id>2E316C2D-D805-48A2-9824-B088FF546BE9</Id>
+  <Version>1.0.0.0</Version>
+  <ProviderName>Kai Loh</ProviderName>
+  <DefaultLocale>en-US</DefaultLocale>
+  <DisplayName DefaultValue="My First Mail Add-in (Read)" />
+  <Description DefaultValue="Get the subject and from fields from an email message" />
+  <Hosts>
+    <Host Name="Mailbox" />
+  </Hosts>
+  <Requirements>
+    <Sets DefaultMinVersion="1.1">
+      <Set MinVersion="1.1" Name="Mailbox"></Set>
+    </Sets>
+  </Requirements>
+
+  <FormSettings>
+    <Form xsi:type="ItemRead">
+      <DesktopSettings>
+        <SourceLocation DefaultValue="https://mysterious-refuge-5139.herokuapp.com/" />
+        <RequestedHeight>400</RequestedHeight>
+      </DesktopSettings>
+      <TabletSettings>
+        <SourceLocation DefaultValue=
+          "https://mysterious-refuge-5139.herokuapp.com/" />
+          <RequestedHeight>400</RequestedHeight>
+        </TabletSettings>
+        <PhoneSettings>
+          <SourceLocation DefaultValue=
+            "https://mysterious-refuge-5139.herokuapp.com/" />
+          </PhoneSettings>
+        </Form>
+      </FormSettings>
+      <Permissions>ReadItem</Permissions>
+      <Rule xsi:type="RuleCollection" Mode="Or">
+        <Rule xsi:type="ItemIs" ItemType="Appointment" FormType="Read" />
+        <Rule xsi:type="ItemIs" ItemType="Message" FormType="Read" />
+      </Rule>
+    </OfficeApp>
