@@ -11,17 +11,40 @@
 </head>
 <body class="ms-font-m">
 	<div id="content-main">
-		<p>This app was activated with following details:</p>
+		<p>Team Lunch</p>
 		<table id="details">
-			<tr>
-				<th>Subject:</th>
-				<td id="subject"></td>
-			</tr>
-			<tr>
-				<th>From:</th>
-				<td id="from"></td>
-			</tr>
+            <tr>
+                <!--Load current default location from device -->
+                <td><label class="ms-Label">Near Zip : </label></td>
+                <td ><input class="ms-TextField-field" type="text" name="zipcode"><br></td>
+            </tr>
+
+            <tr>
+            <td><label class="ms-Label">Within miles</label></td>
+            <td>
+                <select id="cuisine">
+                    <option value="miles5">5</option>
+                    <option value="miles10">10</option>
+                    <option value="miles25">25</option>
+                </select>
+            </td>
+            </tr>
+
+            <tr>
+            <td><label class="ms-Label">Choose Cuisine:</label></td>
+				<td>
+                    <select id="cuisine">
+                        <option value="Any">Any...</option>
+                        <option value="mexican">Mexican</option>
+                        <option value="thai">Thai</option>
+                        <option value="indian">Indian</option>
+                        <option value="american">American</option>
+                    </select>                
+                </td>
+			
+        </tr>
 		</table>
+        <button class="ms-Button ms-Button--primary"><span class="ms-Button-icon"><i class="ms-Icon ms-Icon--plus"></i></span> <span class="ms-Button-label">Refresh Results</span> <span class="ms-Button-description">Refresh results</span></button>
 	</div>
 </body>
 </html>
