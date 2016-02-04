@@ -49,13 +49,13 @@
                 </td>
             </tr>
         </table>
-        <button id="search" onclick="getListOfRestaurants()">Search</button>
-        <button class="ms-Button ms-Button--primary"><span class="ms-Button-icon"><i class="ms-Icon ms-Icon--plus"></i></span> <span class="ms-Button-label">Refresh Results</span> <span class="ms-Button-description">Refresh results</span></button>
-
+        <button id="search" onclick="getListOfRestaurants()">Find Restaurant</button>
         <br>&nbsp;
         <div>
             <table id="resultTable"></table>
         </div>
+        <br>&nbsp;
+        <button id="addItem" onclick="addItemToOutlook(restaurantData.businesses[0])">Add Item to Outlook</button>
         <div id='mapDiv' style="position:absolute; height:200px; bottom:0; left:0; right:0;"></div>
     </div>
 </body>

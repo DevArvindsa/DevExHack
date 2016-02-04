@@ -12,6 +12,8 @@ var auth; //param for yelp settings
 var message; //param for yelp settings
 var parameterMap; //param for yelp settings
 
+var restaurantData;
+
 function setYelpParams() {
 
     auth = {
@@ -56,6 +58,7 @@ function setYelpParams() {
 
 
 function getListOfRestaurants() {
+    restaurantData = "";
     nearZip = document.getElementById("zipCode").value;
     searchTerm = document.getElementById("cuisine").value;
     if ((nearZip == null) || (nearZip == ""))
@@ -83,6 +86,7 @@ function getListOfRestaurants() {
 
 
 function displayData(data) {
+    restaurantData = data;
     len = data.businesses.length;
     console.log("Results count = " + len);
     var businessItem = "";
@@ -107,4 +111,27 @@ function displayData(data) {
     }
 
     
+}
+
+function addItemToOutlook(selectedRestaurant)
+{
+    htmlTxt = "<h1>You are invited for Team Lunch</h1>"
+    htmlTxt += "&nbsp";
+    htmlTxt += "Restaurant " + selectedRestaurant.name;
+    htmlTxt += "&nbsp";
+    Office.context.mailbox.item.body.setSelectedDataAsync(htmlTxt,
+      function (asyncResult) {
+          if (asyncResult.status == "failed") {
+              showMessage("Action failed with error: " + asyncResult.error.message);
+          } else {
+              showMessage("You successfully wrote in the email body.");
+          }
+      }
+    );
+
+}
+
+function showMessage(msg)
+{
+    console.log(msg)
 }
