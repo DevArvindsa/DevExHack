@@ -8,12 +8,13 @@ Office.initialize = function (reason) {
 var searchTerm = 'indian'; //read this from the document
 var nearZip = '98052'; //read this from the document
 
+var auth; //param for yelp settings
 var message; //param for yelp settings
 var parameterMap; //param for yelp settings
 
 function setYelpParams() {
 
-    var auth = {
+    auth = {
         consumerKey: "H4i7HNOS1rfwl6ORgsO9Jw",
         consumerSecret: "ljNz06TJrX525idSrNx_d_OaA8w",
         accessToken: "iYZxlWddn7ZCLLI7TIsr7W-LjPWFAuJJ",
@@ -83,7 +84,7 @@ function getListOfRestaurants() {
 
 function displayData(data) {
     len = data.businesses.length;
-
+    console.log("Results count = " + len);
     var businessItem = "";
     if (len > 0) {
         for (var i = 0; i < len; i++) {
@@ -100,6 +101,7 @@ function displayData(data) {
             }
         }
         if (businessItem != "") {
+            document.getElementById("resultTable").innerHTML = ""; //cleanup table first
             $("#resultTable").append(businessItem).removeClass("hidden");
         }
     }
