@@ -4,10 +4,10 @@
   xsi:type="MailApp">
   <Id>2E316C2D-D805-48A2-9824-B088FF546BE9</Id>
   <Version>1.0.0.0</Version>
-  <ProviderName>Kai Loh</ProviderName>
+  <ProviderName>Crazy DexExHacks</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
-  <DisplayName DefaultValue="My First Mail Add-in (Read)" />
-  <Description DefaultValue="Get the subject and from fields from an email message" />
+  <DisplayName DefaultValue="Group Bite" />
+  <Description DefaultValue="Group bite - Let's eat together !" />
   <Hosts>
     <Host Name="Mailbox" />
   </Hosts>
@@ -20,17 +20,17 @@
   <FormSettings>
     <Form xsi:type="ItemRead">
       <DesktopSettings>
-        <SourceLocation DefaultValue="https://mysterious-refuge-5139.herokuapp.com/" />
+        <SourceLocation DefaultValue="https://devexhack.azurewebsites.net/" />
         <RequestedHeight>400</RequestedHeight>
       </DesktopSettings>
       <TabletSettings>
         <SourceLocation DefaultValue=
-          "https://mysterious-refuge-5139.herokuapp.com/" />
+          "https://devexhack.azurewebsites.net/" />
           <RequestedHeight>400</RequestedHeight>
         </TabletSettings>
         <PhoneSettings>
           <SourceLocation DefaultValue=
-            "https://mysterious-refuge-5139.herokuapp.com/" />
+            "https://devexhack.azurewebsites.net/" />
           </PhoneSettings>
         </Form>
       </FormSettings>
