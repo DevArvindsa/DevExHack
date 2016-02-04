@@ -4,10 +4,10 @@
   xsi:type="MailApp">
   <Id>2E316C2D-D805-48A2-9824-B088FF546BE9</Id>
   <Version>1.0.0.0</Version>
-  <ProviderName>Crazy DexExHacks</ProviderName>
+  <ProviderName>CrazyHacks</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
-  <DisplayName DefaultValue="Group Bite" />
-  <Description DefaultValue="Group bite - Let's eat together !" />
+  <DisplayName DefaultValue="Team Lunch" />
+  <Description DefaultValue="Team Lunch - Let's eat together !" />
   <Hosts>
     <Host Name="Mailbox" />
   </Hosts>
@@ -27,16 +27,23 @@
         <SourceLocation DefaultValue=
           "https://devexhack.azurewebsites.net/" />
           <RequestedHeight>400</RequestedHeight>
-        </TabletSettings>
-        <PhoneSettings>
+      </TabletSettings>
+      <PhoneSettings>
           <SourceLocation DefaultValue=
             "https://devexhack.azurewebsites.net/" />
-          </PhoneSettings>
+      </PhoneSettings>
         </Form>
-      </FormSettings>
-      <Permissions>ReadItem</Permissions>
+	  <Form xsi:type="ItemEdit">
+		  <DesktopSettings>
+			  <SourceLocation DefaultValue="https://devexhack.azurewebsites.net/"/>
+		  </DesktopSettings>
+	  </Form>
+  </FormSettings>
+      <Permissions>ReadWriteItem</Permissions>
       <Rule xsi:type="RuleCollection" Mode="Or">
-        <Rule xsi:type="ItemIs" ItemType="Appointment" FormType="Read" />
-        <Rule xsi:type="ItemIs" ItemType="Message" FormType="Read" />
-      </Rule>
+		  <Rule xsi:type="ItemIs" ItemType="Message" FormType="Edit" />
+		  <Rule xsi:type="ItemIs" ItemType="Appointment" FormType="Edit" />
+		  <Rule xsi:type="ItemIs" ItemType="Message" FormType="Read" />
+		  <Rule xsi:type="ItemIs" ItemType="Appointment" FormType="Read" />
+	  </Rule>
     </OfficeApp>
