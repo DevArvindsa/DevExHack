@@ -5,31 +5,15 @@ Office.initialize = function (reason) {
 	});
 }; 
 
-////// Displays the "Subject" and "From" fields, based on the current mail item
-////function displayItemDetails() {
-////	var item = Office.cast.item.toItemRead(Office.context.mailbox.item);
-////	$('#subject').text(item.subject);
+var searchTerm = 'indian'; //read this from the document
+var nearZip = '98052'; //read this from the document
 
-////	var from;
-////	if (item.itemType === Office.MailboxEnums.ItemType.Message) {
-////		from = Office.cast.item.toMessageRead(item).from;
-////	} else if (item.itemType === Office.MailboxEnums.ItemType.Appointment) {
-////		from = Office.cast.item.toAppointmentRead(item).organizer;
-////	}
-
-////	if (from) {
-////		$('#from').text(from.displayName);
-////	}
-////}
-var auth = "";
-var terms = 'indian';
-var near = '98007';
-var message;
-var parameterMap;
+var message; //param for yelp settings
+var parameterMap; //param for yelp settings
 
 function setYelpParams() {
 
-    auth = {
+    var auth = {
         consumerKey: "H4i7HNOS1rfwl6ORgsO9Jw",
         consumerSecret: "ljNz06TJrX525idSrNx_d_OaA8w",
         accessToken: "iYZxlWddn7ZCLLI7TIsr7W-LjPWFAuJJ",
@@ -42,15 +26,13 @@ function setYelpParams() {
     };
 
     var accessor = {
-
         consumerSecret: auth.consumerSecret,
         tokenSecret: auth.accessTokenSecret
-
     };
 
     var parameters = [];
-    parameters.push(['term', terms]);
-    parameters.push(['location', near]);
+    parameters.push(['term', searchTerm]);
+    parameters.push(['location', nearZip]);
     parameters.push(['callback', 'cb']);
     parameters.push(['oauth_consumer_key', auth.consumerKey]);
     parameters.push(['oauth_consumer_secret', auth.consumerSecret]);
@@ -70,25 +52,18 @@ function setYelpParams() {
     //console.log(parameterMap);
 
 }
-var searchUrl = "";
+
 
 function getListOfRestaurants() {
-    console.log("refresh result clicked");
-
-    searchUrl = "https://api.yelp.com/v2/search/?term=dinner&location=Redmond, WA&limit=10&radius_filter=1000&actionlinks=true&category_filter=chinese"
-    searchUrl = "https://opentable.herokuapp.com/api/restaurants";
-
-    if ((document.getElementById("zipCode").value == null) || (document.getElementById("zipCode").value ==""))
+    nearZip = document.getElementById("zipCode").value;
+    searchTerm = document.getElementById("cuisine").value;
+    if ((nearZip == null) || (nearZip == ""))
     {
         alert("please enter zip code");
         return;
     }
-    else
-    {
-        searchUrl = searchUrl + "?zip=" + document.getElementById("zipCode").value;
-    }
 
-    setYelpParams();
+    setYelpParams(); //set yelp search params
     $.ajax({
         'url': message.action,
         'data': parameterMap,
@@ -104,9 +79,6 @@ function getListOfRestaurants() {
     });
     //return false;//suppress natural form submission
 }
-
-
-
 
 
 function displayData(data) {
