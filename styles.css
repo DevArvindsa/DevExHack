@@ -5,6 +5,7 @@
 
 body {
     padding: 0;
+    min-width: 350px;
 }
 
 #content-main {
@@ -20,7 +21,6 @@ body {
 }
 
 .main-banner {
-    background: #0078d7;
     color: #fff;
     font-weight: 200;
     padding: 15px;
@@ -61,3 +61,4 @@ body {
 .results-container ul {
     list-style: none;
 }
+

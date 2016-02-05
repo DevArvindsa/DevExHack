@@ -18,7 +18,7 @@
 <body class="ms-font-m">
     <div id="allowme"></div>
     <div id="content-main">
-        <div class="main-banner">
+        <div class="main-banner ms-bgColor-themePrimary">
             <h1>Team Lunch</h1>
         </div>
         
@@ -60,8 +60,11 @@
                     <span class="ms-Button-label">Search</span>
                     <span class="ms-Button-description">Refresh results</span>
                 </button>
-                <button id="addItem" onclick="addItemToOutlook(restaurantData.businesses[0])">Add Item to Outlook</button>
-        
+                <button id="addItem" class="ms-Button ms-Button--primary">
+                    <span class="ms-Button-icon"><i class="ms-Icon ms-Icon--plus"></i></span>
+                    <span class="ms-Button-label">Add selected to Outlook</span>
+                    <span class="ms-Button-description">Add selected to Outlook</span>
+                </button>
             </div>
             <div id="mapDiv" class="map"></div>
         </div>
@@ -73,11 +76,11 @@
     
     <script type="text/html" id="row">
         <li>
-            <div class="ms-ListItem">
+            <div class="ms-ListItem ms-u-slideRightIn40" data-index="{{idx}}">
                 <img src="{{image_url}}" class="ms-ListItem-image"/>
                 <span class="ms-ListItem-primaryText">{{name}}</span>
-                <a class="ms-ListItem-tertiaryText" href="tel:{{display_phone}}">Call us! {{display_phone}}</a>
                 <p class="ms-ListItem-secondaryText">{{snippet_text}}</p>
+                <a class="ms-ListItem-tertiaryText" href="tel:{{display_phone}}">Call us! {{display_phone}}</a>
                 <span class="ms-ListItem-metaText">{{rating}}</span>
                 <div class="ms-ListItem-actions">
                     {{#stars}}{{rating}}{{/stars}}

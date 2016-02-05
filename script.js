@@ -9,6 +9,12 @@ var rowTemplate;
 
 $(function() {
     $('#search').click(getListOfRestaurants);
+    $('#addItem').click(function () {
+        $('#resultTable .ms-ListItem.is-unread').each(function(i, e) {
+            var idx = parseInt($(e).data('index'), 10);
+            addItemToOutlook(restaurantData.businesses[idx]);  
+        });
+    });
     rowTemplate = $('#row').html();
     Mustache.parse(rowTemplate);
 })
@@ -129,9 +135,15 @@ function displayData(data) {
     if (len > 0) {
         for (var i = 0; i < len; i++) {
             data.businesses[i].stars = stars;
+            data.businesses[i].idx = i;
             var node = Mustache.render(rowTemplate, data.businesses[i]);
             $("#resultTable").append(node);
         }
+        $('#resultTable li div *:not(a)').click(function(e) {
+            $(e.target).closest('.ms-ListItem').toggleClass('is-unread');
+            e.preventDefault();
+            e.stopPropagation();
+        });
     }
 
     
