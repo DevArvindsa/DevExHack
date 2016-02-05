@@ -67,12 +67,20 @@
         </div>
         
         <div class="results-container">
-            <table id="resultTable"></table>
+            <ul id="resultTable"></ul>
         </div>
     </div>
     
     <script type="text/html" id="row">
-        
+        <li>
+            <div>
+                <img src="{{image_url}}"/>
+                <h2>{{name}}</h2>
+                <span>{{rating}}</span>
+                <span>{{display_phone}}</span>
+                <p>{{snippet_text}}</p>
+            </div>
+        </li>
     </script>
 </body>
 </html>

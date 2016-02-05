@@ -5,8 +5,12 @@ Office.initialize = function (reason) {
 	});
 }; 
 
+var rowTemplate;
+
 $(function() {
     $('#search').click(getListOfRestaurants);
+    rowTemplate = $('#row').html();
+    Mustache.parse(rowTemplate);
 })
 
 var searchTerm = 'indian'; //read this from the document
@@ -103,25 +107,11 @@ $(document).on('addin.located', function (e, addr, lat, lng) {
 function displayData(data) {
     restaurantData = data;
     len = data.businesses.length;
-    console.log("Results count = " + len);
-    var businessItem = "";
+    $("#resultTable").html('');
     if (len > 0) {
         for (var i = 0; i < len; i++) {
-            console.log("loop " + i);
-            if (1 == 1) { //TODO check business name exists in JSON and anything else which is mandatory
-                businessItem += "<tr>";
-                businessItem += "<td>" + data.businesses[i].image_url + "</td>";
-                businessItem += "<td>" + data.businesses[i].name + "</td>";
-                businessItem += "<td>" + data.businesses[i].rating + "</td>";
-                businessItem += "<td>" + data.businesses[i].display_phone + "</td>";
-                businessItem += "<td>" + data.businesses[i].snippet_text + "</td>";
-                businessItem += "</tr>";
-                //businessItem += "<tr><td>" + data.restaurants[i].name + "</td><td>" + data.restaurants[0].rating + "</td><td>" + data.businesses[0].url + "</td></tr>";
-            }
-        }
-        if (businessItem != "") {
-            document.getElementById("resultTable").innerHTML = ""; //cleanup table first
-            $("#resultTable").append(businessItem).removeClass("hidden");
+            var node = Mustache.render(rowTemplate, data.businesses[i]);
+            $("#resultTable").append(node);
         }
     }
 
