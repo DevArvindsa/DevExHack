@@ -1,5 +1,13 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+body {
+    padding: 0;
+}
+
 #details {
-	margin-left: 15px;
 }
 
 	#details th {
@@ -14,5 +22,46 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-	padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-content: stretch;
+}
+
+.main-banner {
+    background: #0078d7;
+    color: #fff;
+    font-weight: 200;
+    padding: 15px;
+}
+
+
+.map {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.search-container {
+    height: 250px;
+    overflow: hidden;
+    position: relative;
+    flex: none;
+}
+
+.search-menu {
+    display: inline-block;
+    background: #fff;
+    padding: 15px;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+
+}
+
+.results-container {
+    overflow-y: scroll;
+    
 }

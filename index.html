@@ -6,57 +6,72 @@
 	<script src="https://appsforoffice.microsoft.com/lib/1.1/hosted/office.js" type="text/javascript"></script>
     <script type="text/javascript" src="https://oauth.googlecode.com/svn/code/javascript/oauth.js"></script>
     <script type="text/javascript" src="https://oauth.googlecode.com/svn/code/javascript/sha1.js"></script>
-    <script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
+    <script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0&s=1"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.min.js"></script>
 	<link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/1.0/fabric.min.css"> 
-	<link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/1.0/fabric.components.min.css"> 
+	<link rel="stylesheet" href="https://appsforoffice.microsoft.com/fabric/1.0/fabric.components.min.css">
+
 	<link href="styles.css" rel="stylesheet" type="text/css" />
-    
 	<script src="geo.js" type="text/javascript"></script>
 	<script src="script.js" type="text/javascript"></script>
 </head>
 <body class="ms-font-m">
+    <div id="allowme"></div>
     <div id="content-main">
-        <p>Team Lunch</p>
-        <table id="details">
-            <tr>
-                <!--Load current default location from device -->
-                <td><label class="ms-Label">Near Zip : </label></td>
-                <td><input id="zipCode" value="98052"></td>
-            </tr>
+        <div class="main-banner">
+            <h1>Team Lunch</h1>
+        </div>
+        
+        <div class="search-container">
+            <div class="search-menu">
+                <table id="details">
+                    <tr>
+                        <!--Load current default location from device -->
+                        <td><label class="ms-Label">Near Zip : </label></td>
+                        <td><input id="zipCode" value="98052"></td>
+                    </tr>
 
-            <tr>
-                <td><label class="ms-Label">Within miles</label></td>
-                <td>
-                    <select id="where">
-                        <option value="miles5">5</option>
-                        <option value="miles10">10</option>
-                        <option value="miles25">25</option>
-                    </select>
-                </td>
-            </tr>
+                    <tr>
+                        <td><label class="ms-Label">Within miles</label></td>
+                        <td>
+                            <select id="where">
+                                <option value="miles5">5</option>
+                                <option value="miles10">10</option>
+                                <option value="miles25">25</option>
+                            </select>
+                        </td>
+                    </tr>
 
-            <tr>
-                <td><label class="ms-Label">Choose Cuisine:</label></td>
-                <td>
-                    <select id="cuisine">
-                        <option value="">Any...</option>
-                        <option value="mexican">Mexican</option>
-                        <option value="thai">Thai</option>
-                        <option value="indian">Indian</option>
-                        <option value="american">American</option>
-                        <option value="french">French</option>
-                    </select>
-                </td>
-            </tr>
-        </table>
-        <button id="search" onclick="getListOfRestaurants()">Search</button>
-        <button class="ms-Button ms-Button--primary"><span class="ms-Button-icon"><i class="ms-Icon ms-Icon--plus"></i></span> <span class="ms-Button-label">Refresh Results</span> <span class="ms-Button-description">Refresh results</span></button>
-
-        <br>&nbsp;
-        <div>
+                    <tr>
+                        <td><label class="ms-Label">Choose Cuisine:</label></td>
+                        <td>
+                            <select id="cuisine">
+                                <option value="">Any...</option>
+                                <option value="mexican">Mexican</option>
+                                <option value="thai">Thai</option>
+                                <option value="indian">Indian</option>
+                                <option value="american">American</option>
+                                <option value="french">French</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                <button id="search" class="ms-Button ms-Button--primary">
+                    <span class="ms-Button-icon"><i class="ms-Icon ms-Icon--plus"></i></span>
+                    <span class="ms-Button-label">Search</span>
+                    <span class="ms-Button-description">Refresh results</span>
+                </button>
+            </div>
+            <div id="mapDiv" class="map"></div>
+        </div>
+        
+        <div class="results-container">
             <table id="resultTable"></table>
         </div>
-        <div id='mapDiv' style="position:absolute; height:200px; bottom:0; left:0; right:0;"></div>
     </div>
+    
+    <script type="text/html" id="row">
+        
+    </script>
 </body>
 </html>

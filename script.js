@@ -1,9 +1,13 @@
 // This function is called when Office.js is ready to start your Add-in
 Office.initialize = function (reason) { 
-	$(document).ready(function () {
+	$(function () {
 		//displayItemDetails();
 	});
 }; 
+
+$(function() {
+    $('#search').click(getListOfRestaurants);
+})
 
 var searchTerm = 'indian'; //read this from the document
 var nearZip = '98052'; //read this from the document
@@ -55,7 +59,7 @@ function setYelpParams() {
 }
 
 
-function getListOfRestaurants() {
+function getListOfRestaurants(e) {
     nearZip = document.getElementById("zipCode").value;
     searchTerm = document.getElementById("cuisine").value;
     if ((nearZip == null) || (nearZip == ""))
@@ -78,9 +82,20 @@ function getListOfRestaurants() {
             console.log('error: ' + textStatus + ': ' + errorThrown);
         }
     });
+    $(document).trigger('addin.search', [{
+        zip: nearZip,
+        query: searchTerm
+    }]);
+    e.preventDefault();
+    e.stopPropagation();
     //return false;//suppress natural form submission
 }
 
+
+$(document).on('addin.located', function (e, addr, lat, lng) {
+    $('#zipCode').val(addr);
+    console.log(addr, lat, lng); 
+});
 
 function displayData(data) {
     len = data.businesses.length;
