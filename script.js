@@ -16,6 +16,8 @@ var auth; //param for yelp settings
 var message; //param for yelp settings
 var parameterMap; //param for yelp settings
 
+var restaurantData;
+
 function setYelpParams() {
 
     auth = {
@@ -60,6 +62,7 @@ function setYelpParams() {
 
 
 function getListOfRestaurants(e) {
+    restaurantData = "";
     nearZip = document.getElementById("zipCode").value;
     searchTerm = document.getElementById("cuisine").value;
     if ((nearZip == null) || (nearZip == ""))
@@ -98,6 +101,7 @@ $(document).on('addin.located', function (e, addr, lat, lng) {
 });
 
 function displayData(data) {
+    restaurantData = data;
     len = data.businesses.length;
     console.log("Results count = " + len);
     var businessItem = "";
@@ -122,4 +126,47 @@ function displayData(data) {
     }
 
     
+}
+
+function addItemToOutlook(selectedRestaurant)
+{
+    setLocation(selectedRestaurant.display_phone); //todo change to address
+
+    htmlTxt = "<h1>You are invited for Team Lunch</h1>"
+    htmlTxt += "&nbsp";
+    htmlTxt += "Restaurant " + selectedRestaurant.name;
+    htmlTxt += "Restaurant : TEST " ;
+    htmlTxt += "&nbsp";
+        
+    Office.context.mailbox.item.body.setAsync(htmlTxt, { coercionType: Office.CoercionType.Html },
+      function (asyncResult) {
+          if (asyncResult.status == "failed") {
+              showMessage("Action failed with error: " + asyncResult.error.message);
+          } else {
+              showMessage("You successfully wrote in the email body.");
+          }
+      }
+    );
+}
+
+function setLocation(address) {
+    Office.context.mailbox.item.location.setAsync(
+        address,
+        { asyncContext: { var1: 1, var2: 2 } },
+        function (asyncResult) {
+            if (asyncResult.status == Office.AsyncResultStatus.Failed) {
+                showMessage("Action failed with error: " + asyncResult.error.message);
+            }
+            else {
+                showMessage("Successfully set the location");
+                // Successfully set the location.
+                // Do whatever appropriate for your scenario
+                // using the arguments var1 and var2 as applicable.
+            }
+        });
+}
+
+function showMessage(msg)
+{
+    console.log(msg)
 }

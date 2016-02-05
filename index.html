@@ -30,7 +30,6 @@
                         <td><label class="ms-Label">Near Zip : </label></td>
                         <td><input id="zipCode" value="98052"></td>
                     </tr>
-
                     <tr>
                         <td><label class="ms-Label">Within miles</label></td>
                         <td>
@@ -61,6 +60,8 @@
                     <span class="ms-Button-label">Search</span>
                     <span class="ms-Button-description">Refresh results</span>
                 </button>
+                <button id="addItem" onclick="addItemToOutlook(restaurantData.businesses[0])">Add Item to Outlook</button>
+        
             </div>
             <div id="mapDiv" class="map"></div>
         </div>
