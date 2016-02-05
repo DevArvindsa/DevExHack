@@ -151,13 +151,31 @@ function displayData(data) {
 
 function addItemToOutlook(selectedRestaurant)
 {
-    setLocation(selectedRestaurant.display_phone); //todo change to address
+    setSubject(selectedRestaurant.name);
+    setLocation(selectedRestaurant.location.display_address); //todo change to address
+    var address="";
+    var htmlTxt  = "";
+    //prepare address
+    for (i = 0; i < selectedRestaurant.location.display_address.length;i++)
+    {
+        address += address + selectedRestaurant.location.display_address[i] + " ";
+    }
 
-    htmlTxt = "<h1>You are invited for Team Lunch</h1>"
+    htmlTxt = "<h2>You are invited for Team Lunch</h2>";
+    htmlTxt += "<div><table>";
+    htmlTxt += "<tr><td><h1>" + selectedRestaurant.name + "<h1></td>";
+    htmlTxt += "<td><img src=\"" + selectedRestaurant.rating_img_url + "\"></td>";
+    htmlTxt += "</tr>";
+    //htmlTxt += "&nbsp&nbsp";
+    htmlTxt += "<tr><td>";
+    htmlTxt += "<img src=\"" + selectedRestaurant.image_url + "\">";
+    htmlTxt += "</td><td>";
+    htmlTxt += "Address : "+  address;
     htmlTxt += "&nbsp";
-    htmlTxt += "Restaurant " + selectedRestaurant.name;
-    htmlTxt += "Restaurant : TEST " ;
-    htmlTxt += "&nbsp";
+    htmlTxt += "Phone # : "+  selectedRestaurant.display_phone;
+    htmlTxt += "</td></tr></table></div>";
+    htmlTxt += "<h4>powered by 'Team Lunch' addins for outlook</h4>";
+
         
     Office.context.mailbox.item.body.setAsync(htmlTxt, { coercionType: Office.CoercionType.Html },
       function (asyncResult) {
@@ -168,6 +186,23 @@ function addItemToOutlook(selectedRestaurant)
           }
       }
     );
+}
+
+function setSubject(name) {
+    Office.context.mailbox.item.subject.setAsync(
+        "Team Lunch - " + name,
+        { asyncContext: { var1: 1, var2: 2 } },
+        function (asyncResult) {
+            if (asyncResult.status == Office.AsyncResultStatus.Failed) {
+                showMessage("Action failed with error: " + asyncResult.error.message);
+            }
+            else {
+                showMessage("Successfully set the location");
+                // Successfully set the location.
+                // Do whatever appropriate for your scenario
+                // using the arguments var1 and var2 as applicable.
+            }
+        });
 }
 
 function setLocation(address) {
@@ -186,6 +221,7 @@ function setLocation(address) {
             }
         });
 }
+
 
 function showMessage(msg)
 {
