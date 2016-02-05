@@ -5,7 +5,7 @@
 
 body {
     padding: 0;
-    min-width: 350px;
+    min-width: 400px;
 }
 
 #content-main {
@@ -60,5 +60,5 @@ body {
 
 .results-container ul {
     list-style: none;
+    padding: 0;
 }
-
