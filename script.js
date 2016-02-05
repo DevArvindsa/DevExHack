@@ -115,11 +115,15 @@ function displayData(data) {
 
 function addItemToOutlook(selectedRestaurant)
 {
+    setLocation(selectedRestaurant.display_phone); //todo change to address
+
     htmlTxt = "<h1>You are invited for Team Lunch</h1>"
     htmlTxt += "&nbsp";
     htmlTxt += "Restaurant " + selectedRestaurant.name;
+    htmlTxt += "Restaurant : TEST " ;
     htmlTxt += "&nbsp";
-    Office.context.mailbox.item.body.setSelectedDataAsync(htmlTxt,
+        
+    Office.context.mailbox.item.body.setAsync(htmlTxt, { coercionType: Office.CoercionType.Html },
       function (asyncResult) {
           if (asyncResult.status == "failed") {
               showMessage("Action failed with error: " + asyncResult.error.message);
@@ -128,7 +132,23 @@ function addItemToOutlook(selectedRestaurant)
           }
       }
     );
+}
 
+function setLocation(address) {
+    Office.context.mailbox.item.location.setAsync(
+        address,
+        { asyncContext: { var1: 1, var2: 2 } },
+        function (asyncResult) {
+            if (asyncResult.status == Office.AsyncResultStatus.Failed) {
+                showMessage("Action failed with error: " + asyncResult.error.message);
+            }
+            else {
+                showMessage("Successfully set the location");
+                // Successfully set the location.
+                // Do whatever appropriate for your scenario
+                // using the arguments var1 and var2 as applicable.
+            }
+        });
 }
 
 function showMessage(msg)
