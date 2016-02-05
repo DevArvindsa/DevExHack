@@ -49,6 +49,7 @@ body {
     overflow: hidden;
     position: relative;
     flex: none;
+    z-index: 100;
 }
 
 .search-menu {
