@@ -89,7 +89,7 @@ function getListOfRestaurants(e) {
             console.log('error: ' + textStatus + ': ' + errorThrown);
         }
     });
-    $(document).trigger('addin.search', [{
+    $(window).trigger('addin.search', [{
         zip: nearZip,
         query: searchTerm
     }]);
@@ -99,10 +99,28 @@ function getListOfRestaurants(e) {
 }
 
 
-$(document).on('addin.located', function (e, addr, lat, lng) {
+$(window).on('addin.located', function (e, addr, lat, lng) {
     $('#zipCode').val(addr);
     console.log(addr, lat, lng); 
 });
+
+function stars() {
+    var full = '<div class="ms-ListItem-action"><i class="ms-Icon ms-Icon--star"></i></div>';
+    var half = '<div class="ms-ListItem-action"><i class="ms-Icon ms-Icon--starEmpty"></i></div>';
+    return function (text, render) {
+        var rating = render(text);
+        var float = parseFloat(rating);
+        var integer = parseInt(rating, 10);
+        var result = '';
+        for (var i = 0; i < integer; i++) {
+            result += full;
+        }
+        if (float > integer) {
+            result += half;
+        }
+        return result;
+    }
+}
 
 function displayData(data) {
     restaurantData = data;
@@ -110,6 +128,7 @@ function displayData(data) {
     $("#resultTable").html('');
     if (len > 0) {
         for (var i = 0; i < len; i++) {
+            data.businesses[i].stars = stars;
             var node = Mustache.render(rowTemplate, data.businesses[i]);
             $("#resultTable").append(node);
         }

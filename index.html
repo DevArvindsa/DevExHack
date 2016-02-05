@@ -73,14 +73,21 @@
     
     <script type="text/html" id="row">
         <li>
-            <div>
-                <img src="{{image_url}}"/>
-                <h2>{{name}}</h2>
-                <span>{{rating}}</span>
-                <span>{{display_phone}}</span>
-                <p>{{snippet_text}}</p>
+            <div class="ms-ListItem">
+                <img src="{{image_url}}" class="ms-ListItem-image"/>
+                <span class="ms-ListItem-primaryText">{{name}}</span>
+                <a class="ms-ListItem-tertiaryText" href="tel:{{display_phone}}">Call us! {{display_phone}}</a>
+                <p class="ms-ListItem-secondaryText">{{snippet_text}}</p>
+                <span class="ms-ListItem-metaText">{{rating}}</span>
+                <div class="ms-ListItem-actions">
+                    {{#stars}}{{rating}}{{/stars}}
+                </div>
             </div>
         </li>
+    </script>
+    
+    <script type="text/html" id="email">
+        
     </script>
 </body>
 </html>

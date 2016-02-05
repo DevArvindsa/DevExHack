@@ -7,14 +7,6 @@ body {
     padding: 0;
 }
 
-#details {
-}
-
-	#details th {
-		text-align: left;
-		padding-right: 10px;
-	}
-
 #content-main {
 	background: #fff;
 	position: fixed;

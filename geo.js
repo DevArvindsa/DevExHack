@@ -38,7 +38,7 @@
                 onLocationError,
                 locationOptions);
         }
-        $(document).on('addin.search', centerMapOnQuery);
+        $(window).on('addin.search', centerMapOnQuery);
     }
     
     function onLocationSuccess(position) {
@@ -50,7 +50,7 @@
             location: location,
             callback: function (result) {
                 map.setView({ center: location, zoom: 14 });
-                $(document).trigger('addin.located', [result.name, lat, lng]);
+                $(window).trigger('addin.located', [result.name, lat, lng]);
             }
         });
     }
@@ -66,7 +66,7 @@
                 var lng = location.longitude;
                 var addr = results.parsedAddress.formattedAddress;
                 map.setView({ center: location, zoom: 14 });
-                $(document).trigger('addin.located', [addr, lat, lng]);
+                $(window).trigger('addin.located', [addr, lat, lng]);
             }
         });
     }
