@@ -151,8 +151,7 @@ function displayData(data) {
 
 function addItemToOutlook(selectedRestaurant)
 {
-    setSubject(selectedRestaurant.name);
-    setLocation(selectedRestaurant.location.display_address); //todo change to address
+
     var address="";
     var htmlTxt  = "";
     //prepare address
@@ -176,7 +175,7 @@ function addItemToOutlook(selectedRestaurant)
     htmlTxt += "</td></tr></table></div>";
     htmlTxt += "<h4>powered by 'Team Lunch' addins for outlook</h4>";
 
-        
+      
     Office.context.mailbox.item.body.setAsync(htmlTxt, { coercionType: Office.CoercionType.Html },
       function (asyncResult) {
           if (asyncResult.status == "failed") {
@@ -186,6 +185,10 @@ function addItemToOutlook(selectedRestaurant)
           }
       }
     );
+
+    setLocation(selectedRestaurant.location.display_address); //todo change to address
+    setSubject(selectedRestaurant.name);
+
 }
 
 function setSubject(name) {
@@ -197,7 +200,7 @@ function setSubject(name) {
                 showMessage("Action failed with error: " + asyncResult.error.message);
             }
             else {
-                showMessage("Successfully set the location");
+                showMessage("Successfully set the subject");
                 // Successfully set the location.
                 // Do whatever appropriate for your scenario
                 // using the arguments var1 and var2 as applicable.
@@ -206,8 +209,9 @@ function setSubject(name) {
 }
 
 function setLocation(address) {
+    locationAddress = address.toString();
     Office.context.mailbox.item.location.setAsync(
-        address,
+        locationAddress,
         { asyncContext: { var1: 1, var2: 2 } },
         function (asyncResult) {
             if (asyncResult.status == Office.AsyncResultStatus.Failed) {
