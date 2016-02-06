@@ -8,6 +8,7 @@
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="Team Lunch" />
   <Description DefaultValue="Team Lunch - Let's eat together !" />
+  <IconUrl DefaultValue="https://devexhack.azurewebsites.net/teamlunchlogo.png"></IconUrl>
   <Hosts>
     <Host Name="Mailbox" />
   </Hosts>
